@@ -61,14 +61,14 @@ class DoublyLinkedList:
     def add_to_tail(self, value):
         new_node = ListNode(value, None, None)
         self.length += 1
-        if not selftail and not self.head:
+        if not self.tail and not self.head:
             self.tail = new_node
             self.head = new_node
         else:
             new_node.prev = self.tail
             self.tail.next = new_node
             self.tail = new_node
-            
+
             
     """
     Removes the List's current tail node, making the 
@@ -83,7 +83,15 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-        pass
+        if node is self.head:
+            return
+        value = node.value
+        if node is self.tail:
+            self.remove_from_tail()
+        else:
+            node.delete()
+            self.length -= 1
+        self.add_to_head(value)
         
     """
     Removes the input node from its current spot in the 
