@@ -1,4 +1,8 @@
 
+import sys
+sys.path.append('../stack')
+from stack import Stack
+
 from collections import deque
 """
 Binary search trees are a data structure that enforce an ordering over 
@@ -66,17 +70,17 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    def in_order_print(self):
+    def in_order_dft(self):
         if not self:
             return
         
         if self.left:
-            self.left.in_order_print()
+            self.left.in_order_dft()
 
         print(self.value)
 
         if self.right:
-            self.right.in_order_print()
+            self.right.in_order_dft()
        
 
     # Print the value of every node, starting with the given node,
@@ -95,15 +99,25 @@ class BSTNode:
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
-    def dft_print(self):
-        s = []
-        s.append(self)
+    def dft_print(self, node):
+        # s = []
+        # s.append(self)
 
-        while len(s) > 0:
-            current = s.pop()
-            print(current.value)
-            if current.left:
-                s.append(current.left)
+        # while len(s) > 0:
+        #     current = s.pop()
+        #     print(current.value)
+        #     if current.left:
+        #         s.append(current.left)
+
+        s = Stack()
+        s.push(node)
+        while s.len() > 0:
+            t = s.pop()
+            print(t.value)
+            if t.right:
+                s.push(t.right)
+            if t.left:
+                s.push(t.left)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -119,7 +133,7 @@ class BSTNode:
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(1)
+bst = BSTNode(1)
 
 bst.insert(8)
 bst.insert(5)
