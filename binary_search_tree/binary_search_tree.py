@@ -1,4 +1,9 @@
 
+# import sys
+# sys.path.append('../stack')
+# from stack import Stack
+
+
 from collections import deque
 """
 Binary search trees are a data structure that enforce an ordering over 
@@ -96,30 +101,69 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
-        s = []
-        s.append(self)
-
-        while len(s) > 0:
-            current = s.pop()
+        """[iterative PreOrder traversal]
+        1- create an empty stack
+        2- push the root node to the stack
+        3- loop until the stack is empty
+            1- pop the top element in the stack
+            2- manipulate the popped node
+            3- push the right node if it exists (push right first to have left on top)
+            4- push the left node if it exists
+            - repeat...
+        """
+        stack = []
+        stack.append(self)
+        while len(stack):
+            current = stack.pop()
             print(current.value)
+            if current.right:
+                stack.append(current.right)
             if current.left:
-                s.append(current.left)
+                stack.append(current.left)
+
+        # s = []
+        # s.append(node)
+        # while s.len() > 0:
+        #     t = s.pop()
+        #     print(t.value)
+        #     if t.right:
+        #         s.push(t.right)
+        #     if t.left:
+        #         s.push(t.left)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self):
-        pass
+        print(self.value)
+        if self.left:
+            self.left.pre_order_dft()
+        if self.right:
+            self.right.pre_order_dft()
 
     # Print Post-order recursive DFT
     def post_order_dft(self):
-        pass
+        if self.left:
+            self.left.post_order_dft()
+        if self.right:
+            self.right.post_order_dft()
+        print(self.value)
+
+    def get_height(self):
+        if self.left and self.right:
+            return max(self.left.get_height(), self.right.get_height()) + 1
+        if self.left:
+            return self.left.get_height() + 1
+        if self.right:
+            return self.right.get_height() + 1
+        else:
+            return 0
 
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(1)
+bst = BSTNode(1)
 
 bst.insert(8)
 bst.insert(5)
@@ -136,6 +180,6 @@ print("elegant methods")
 print("pre order")
 bst.pre_order_dft()
 print("in order")
-bst.in_order_dft()
+bst.in_order_print()
 print("post order")
 bst.post_order_dft()  

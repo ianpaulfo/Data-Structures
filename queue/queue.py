@@ -44,12 +44,12 @@ class LinkedList:
     self.head = self.head.get_next()
     return value
 
-  # def remove_tail(self):
-    # if not self.head and not self.tail:
-    #   return None
-    # if self.head == self.tail:
-    #         self.head = None
-    #         self.tail = None
+  def remove_tail(self):
+    if not self.head and not self.tail:
+      return None
+    if self.head == self.tail:
+            self.head = None
+            self.tail = None
 
   def contains(self, value):
     if not self.head:
@@ -87,9 +87,9 @@ return elements in First In First Out order.
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
 """
-# import sys
-# sys.path.append('../singly_linked_list')
-# from singly_linked_list import LinkedList
+import sys
+sys.path.append('../singly_linked_list')
+from singly_linked_list import LinkedList
 
 class ArrayQueue:
   def __init__(self):
